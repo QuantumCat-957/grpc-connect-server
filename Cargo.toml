@@ -1,0 +1,61 @@
+[package]
+name = "grpc-connect-server"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "grpc-connect-service"
+path = "src/main.rs"
+
+#[[bin]]
+#name = "helloworld-client"
+#path = "src/rpc/client.rs"
+
+[dependencies]
+tonic = "0.6"
+tokio = { version = "1", features = ["full"] }
+futures = "0.3.19"
+prost = "0.9"
+tracing = {version = "0.1"}
+tracing-subscriber = {version = "0.3"}
+serde = "1"
+serde_json = "1"
+serde_derive = "1.0"
+
+[build-dependencies]
+tonic-build = "0.6"
+
+
+[profile.dev]
+opt-level = 0
+debug = true
+codegen-units = 4
+lto = false
+incremental = true
+panic = 'unwind'
+debug-assertions = true
+overflow-checks = false
+rpath = false
+
+[profile.release]
+opt-level = 3
+debug = false
+codegen-units = 1
+lto = "thin"
+incremental = false
+panic = 'unwind'
+debug-assertions = false
+overflow-checks = false
+rpath = false
+
+[profile.test]
+opt-level = 0
+debug = true
+codegen-units = 16
+lto = false
+incremental = true
+debug-assertions = true
+overflow-checks = true
+rpath = false

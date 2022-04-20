@@ -1,0 +1,38 @@
+syntax = "proto3";
+package grpc_connect;
+
+service GrpcConnect{
+    rpc connecting (ConnectRequest) returns (ConnectReply);
+    rpc gen_receiver (GenReceiverRequest) returns (GenReceiverReply);
+    rpc gen_hex_id (GenHexIdRequest) returns (GenHexIdReply);
+}
+
+message ConnectRequest{
+    string service = 1;
+    string request = 2;
+}
+
+message ConnectReply{
+    string message = 1;
+}
+
+
+message GenReceiverRequest{
+    string sender = 1;
+    string receiver = 2;
+    string pathCode = 3;
+}
+
+message GenReceiverReply{
+    string receiver = 1;
+}
+
+message GenHexIdRequest{
+    string username = 1;
+    string receiver = 2;
+    string pathCode = 3;
+}
+
+message GenHexIdReply{
+    string hexId = 1;
+}

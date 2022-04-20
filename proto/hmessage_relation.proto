@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package relation_grpc;
+
+service Relation {
+  rpc getUserBaseInfo(UserBaseInfoRequest) returns (UserBaseInfoReply);
+  rpc getUserBlockedUsers(UserBlockedUsersRequest) returns (UserBlockedUsersReply);
+  rpc getUserSpaceSettings(UserSpaceSettingsRequest)
+  returns (UserSpaceSettingsReply);
+
+
+  rpc getSpaceBaseInfo(SpaceBaseInfoRequest)
+  returns (SpaceBaseInfoReply);
+  rpc getSpaceMembers(SpaceMembersRequest)
+  returns (SpaceMembersReply);
+}
+
+message UserBaseInfoRequest { string username = 1;
+    int64 traceID = 2; }
+  
+message UserBaseInfoReply { string userInfo = 1; }
+
+message UserBlockedUsersRequest { string username = 1; 
+    int64 traceID = 2;}
+message UserBlockedUsersReply { repeated string blockedUsers = 1; }
+
+message UserSpaceSettingsRequest {
+    string type = 1;
+    string username = 2;
+    int64 traceID = 3;
+  }
+  
+message UserSpaceSettingsReply { repeated string spaceSettings = 1; }
+
+message SpaceBaseInfoRequest { string username = 1; int64 traceID = 2;}
+
+message SpaceBaseInfoReply {repeated string spaceInfo = 1; }
+  
+message SpaceMembersRequest { string spaceCode = 1;int64 traceID = 2; }
+
+message SpaceMembersReply {repeated string spaceMembers = 1; }
+

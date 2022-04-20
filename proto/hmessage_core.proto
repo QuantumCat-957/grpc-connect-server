@@ -1,0 +1,32 @@
+syntax = "proto3";
+package core_grpc;
+
+service Core { 
+  rpc Push(PushRequest) returns (PushReply);
+  rpc NewMessage(NewRequest) returns (NewReply);
+ }
+
+message PushRequest {
+  string path = 1;
+  string username = 2;
+  repeated string list = 3;
+  string message_id = 4;
+  string content = 5;
+  string timestamp = 6;
+
+  int64 traceID = 7;
+}
+
+message PushReply { bool ok = 1; }
+
+message NewRequest {
+  string path = 1;
+  string username = 2;
+  repeated string list = 3;
+  string content = 4;
+
+  int64 traceID = 5;
+}
+
+message NewReply { bool ok = 1; }
+
